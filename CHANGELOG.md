@@ -14,6 +14,12 @@
 
 - The Suggest component now has Swift bindings for Firefox for iOS ([#5806](https://github.com/mozilla/application-services/pull/5806)).
 
+## Nimbus FML ⛅️🔬🔭👾
+
+### ✨ What's New ✨
+
+- Added a `--ref` option to Nimbus FML command line (and therefore the `nimbus-cli`) to specify the tag, branch or commit hash of the FML file being processed ([#5814](https://github.com/mozilla/application-services/pull/5814)).
+
 # v118.0 (_2023-08-28_)
 
 ## General
