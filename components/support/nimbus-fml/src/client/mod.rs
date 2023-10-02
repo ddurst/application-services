@@ -191,7 +191,7 @@ mod unit_tests {
                     default: Value::String("prop_i_1_value".into()),
                     doc: "".into(),
                 }],
-                doc: "feature_i description".to_string(),
+                metadata: Default::default(),
                 ..Default::default()
             }],
             HashMap::new(),
@@ -208,7 +208,7 @@ mod unit_tests {
                     default: Value::String("prop_1_value".into()),
                     doc: "".into(),
                 }],
-                doc: "feature description".to_string(),
+                metadata: Default::default(),
                 allow_coenrollment: true,
             }],
             HashMap::from([(ModuleId::Local("test".into()), fm_i)]),

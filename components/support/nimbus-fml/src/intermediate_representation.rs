@@ -4,7 +4,7 @@
 use crate::defaults_merger::DefaultsMerger;
 use crate::error::FMLError::InvalidFeatureError;
 use crate::error::{did_you_mean, FMLError, Result};
-use crate::frontend::AboutBlock;
+use crate::frontend::{AboutBlock, FeatureMetadata};
 use crate::util::loaders::FilePath;
 use anyhow::{bail, Error, Result as AnyhowResult};
 use serde::{Deserialize, Serialize};
@@ -762,7 +762,8 @@ impl FeatureManifest {
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Default)]
 pub struct FeatureDef {
     pub(crate) name: String,
-    pub(crate) doc: String,
+    #[serde(flatten)]
+    pub(crate) metadata: FeatureMetadata,
     pub(crate) props: Vec<PropDef>,
     pub(crate) allow_coenrollment: bool,
 }
@@ -780,7 +781,7 @@ impl FeatureDef {
         self.name.clone()
     }
     pub fn doc(&self) -> String {
-        self.doc.clone()
+        self.metadata.description.clone()
     }
     pub fn props(&self) -> Vec<PropDef> {
         self.props.clone()
