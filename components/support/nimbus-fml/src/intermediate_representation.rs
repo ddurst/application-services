@@ -772,7 +772,10 @@ impl FeatureDef {
     pub fn new(name: &str, doc: &str, props: Vec<PropDef>, allow_coenrollment: bool) -> Self {
         Self {
             name: name.into(),
-            doc: doc.into(),
+            metadata: FeatureMetadata {
+                description: doc.into(),
+                ..Default::default()
+            },
             props,
             allow_coenrollment,
         }
