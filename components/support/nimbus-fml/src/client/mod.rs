@@ -8,10 +8,13 @@ mod inspector;
 #[cfg(test)]
 mod test_helper;
 
+use crate::frontend::DocumentationLink;
 pub use config::FmlLoaderConfig;
 pub use descriptor::FmlFeatureDescriptor;
+use email_address::EmailAddress;
 pub use inspector::{FmlEditorError, FmlFeatureInspector};
 use serde_json::Value;
+use url::Url;
 
 use crate::{
     error::{ClientError::JsonMergeError, FMLError, Result},
@@ -19,7 +22,7 @@ use crate::{
     parser::Parser,
     util::loaders::{FileLoader, LoaderConfig},
 };
-use std::collections::HashMap;
+use std::{collections::HashMap, str::FromStr};
 
 use std::sync::Arc;
 
@@ -164,6 +167,32 @@ impl UniffiCustomTypeConverter for JsonObject {
 
     fn from_custom(obj: Self) -> Self::Builtin {
         serde_json::Value::Object(obj).to_string()
+    }
+}
+
+#[cfg(feature = "uniffi-bindings")]
+impl UniffiCustomTypeConverter for Url {
+    type Builtin = String;
+
+    fn into_custom(val: Self::Builtin) -> uniffi::Result<Self> {
+        Ok(Url::from_str(&val)?)
+    }
+
+    fn from_custom(obj: Self) -> Self::Builtin {
+        obj.as_str().to_string()
+    }
+}
+
+#[cfg(feature = "uniffi-bindings")]
+impl UniffiCustomTypeConverter for EmailAddress {
+    type Builtin = String;
+
+    fn into_custom(val: Self::Builtin) -> uniffi::Result<Self> {
+        Ok(EmailAddress::from_str(val.as_str())?)
+    }
+
+    fn from_custom(obj: Self) -> Self::Builtin {
+        obj.as_str().to_string()
     }
 }
 
