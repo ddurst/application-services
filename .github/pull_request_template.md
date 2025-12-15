@@ -13,3 +13,4 @@
   - Any breaking changes to Swift or Kotlin binding APIs are noted explicitly
 - [ ] **Dependencies**: This PR follows our [dependency management guidelines](https://github.com/mozilla/application-services/blob/main/docs/dependency-management.md)
   - Any new dependencies are accompanied by a summary of the due diligence applied in selecting them.
+  - Test link.
